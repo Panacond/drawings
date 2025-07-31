@@ -1,247 +1,180 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vue and SVG.js Square Example with Hover Menu</title>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная страница с кнопками</title>
     <style>
-      .dropdown-menu {
-        display: none;
-        padding: 10px;
-        border: 1px solid #ccc;
-        background-color: #f9f9f9;
-        position: absolute;
-        z-index: 1;
-      }
-      .dropdown-menu div {
-        margin: 5px;
-        padding: 5px;
-      }
-      .dropdown-menu.active {
-        display: block;
-      }
-      button {
-        border: 0px solid #ccc;
-        background-color: white;
-        font-size: 3mm;
-        height: 3mm;
-        margin: 0;
-        padding: 0;
-      }
-      div {
-        margin: 0;
-        padding: 0;
-      }
-      input {
-        width: 200px;
-      }
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap'); /* Пример импорта шрифта */
+
+        body {
+            font-family: 'Montserrat', Arial, sans-serif; /* Применяем стильный шрифт */
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #a8c0ff, #3f2b96); /* Спокойный градиентный фон */
+            color: #fff; /* Белый текст для контраста */
+            overflow: hidden; /* Скрываем возможное переполнение от декораций */
+            position: relative; /* Для позиционирования декоративных элементов */
+        }
+
+        /* Декоративные круги */
+        body::before,
+        body::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            filter: blur(50px); /* Размытие для мягкого свечения */
+            z-index: -1; /* Помещаем под контент */
+        }
+
+        body::before {
+            width: 300px;
+            height: 300px;
+            top: -50px;
+            left: -50px;
+        }
+
+        body::after {
+            width: 200px;
+            height: 200px;
+            bottom: -30px;
+            right: -30px;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        h1 {
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3); /* Тень для заголовка */
+        }
+
+        .button-container {
+            background-color: rgba(255, 255, 255, 0.1); /* Полупрозрачный фон для контейнера кнопок */
+            border-radius: 15px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* Отступ между кнопками */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Красивая тень */
+            backdrop-filter: blur(10px); /* Эффект размытого стекла */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .button-container button {
+            width: 300px; /* Фиксированная ширина кнопок */
+            padding: 15px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            color: #fff;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Стили для первой кнопки */
+        .button-container button:first-child {
+            background: linear-gradient(45deg, #FF6B6B, #FFA500); /* Яркий градиент: красный-оранжевый */
+        }
+
+        /* Стили для второй кнопки */
+        .button-container button:nth-child(2) {
+            background: linear-gradient(45deg, #6BFF6B, #00A5FF); /* Яркий градиент: зеленый-голубой */
+        }
+        
+        /* Стили для второй кнопки (если она ведет на тот же файл) */
+        /* Поскольку в вашем примере обе кнопки ведут на page2.html, я применю разные стили к каждой из них */
+        .button-container button:last-child {
+            background: linear-gradient(45deg, #B56BFF, #FF00FF); /* Яркий градиент: фиолетовый-фуксия */
+        }
+
+
+        .button-container button:hover {
+            transform: translateY(-3px); /* Легкий подъем при наведении */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Стиль для раздела 2, чтобы он выделялся */
+        #section2 {
+            margin-top: 100vh; /* Отталкиваем вниз для демонстрации прокрутки */
+            padding: 60px;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            color: #fff;
+            backdrop-filter: blur(15px);
+        }
+
+        #section2 h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        #section2 p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        #section2 a {
+            color: #ffdd00; /* Яркий акцент для ссылки */
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.2s ease-in-out;
+        }
+
+        #section2 a:hover {
+            color: #fff;
+        }
+
+        /* Дополнительные маленькие декоративные элементы */
+        .dot {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            filter: blur(10px);
+            z-index: -1;
+        }
+
+        .dot:nth-child(1) { width: 40px; height: 40px; top: 10%; left: 15%; }
+        .dot:nth-child(2) { width: 25px; height: 25px; bottom: 5%; left: 25%; }
+        .dot:nth-child(3) { width: 50px; height: 50px; top: 20%; right: 10%; }
+        .dot:nth-child(4) { width: 35px; height: 35px; bottom: 15%; right: 20%; }
+        .dot:nth-child(5) { width: 20px; height: 20px; top: 40%; left: 5%; }
+
     </style>
-  </head>
-  <body>
-    <div id="app">
-      <div @mouseenter="showDropdown = true" @mouseleave="showDropdown = false">
-        <button>change</button>
-        <div :class="['dropdown-menu', { active: showDropdown }]">
-          <div>
-            <span>
-              <label>Розробив: </label>
-              <input type="text" v-model="developer" />
-            </span>
-            <span>
-              <label> Перевірив:</label>
-              <input type="text" v-model="inspector" />
-            </span>
-          </div>
-          <div>
-            <span>
-              <label>Шифр: </label>
-              <input type="text" v-model="cipher" />
-            </span>
-            <span>
-              <label>Адреса:</label>
-              <input type="text" v-model="address" />
-            </span>
-          </div>
-          <div>
-            <span>
-              <label>Назва: </label>
-              <input type="text" v-model="name" />
-            </span>
-            <span>
-              <label>Матеріал:</label>
-              <input type="text" v-model="material" />
-            </span>
-          </div>
-          <div>
-            <span>
-              <label>кількість</label>
-              <input type="number" v-model="count" />
-            </span>
-            <span>
-              <label>товщина</label>
-              <input type="number" v-model="thickness" />
-            </span>
-          </div>
-          <div>
-            <p>горизонтальні</p>
-            <div>
-              <span>
-                <label>ширина</label>
-                <input type="number" v-model="Width" />
-              </span>
-            </div>
-            <div>
-              <span>
-                <label>відступ сліва</label>
-                <input type="number" v-model="left" />
-                <span>
-                  <label>відступ справа</label>
-                  <input type="number" v-model="right" />
-                </span>
-              </span>
-            </div>
-            <div>
-              <p>вертикальні</p>
-              <div>
-                <span>
-                  <label>висота</label>
-                  <input type="number" v-model="height" />
-                </span>
-              </div>
-              <div>
-                <span>
-                  <label>відступ згори</label>
-                  <input type="number" v-model="up" />
-                  <span>
-                    <label>відступ знизу</label>
-                    <input type="number" v-model="down" />
-                  </span>
-                </span>
-              </div>
-            </div>
-            <div>
-              <span>
-                <label>диаметр</label>
-                <input type="number" v-model="diametr" />
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="svgContainer"></div>
+</head>
+<body>
+
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+
+    <h1>Добро пожаловать на главную страницу!</h1>
+
+    <div class="button-container">
+        <button onclick="location.href='./parametric.html'">На страницу парметрического чертежа</button>
+        <button onclick="location.href='./draw/draw3.html'">Перейти на Вторую Страницу</button>
+        
     </div>
 
-    <!-- Include Vue -->
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <!-- Include SVG.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/3.1.2/svg.min.js"></script>
+    <div id="section2">
+        <h2>Это Раздел 2 на Главной Странице</h2>
+        <p>Вы успешно перешли к этому разделу, нажав вторую кнопку. Это содержимое находится на той же самой HTML-странице.</p>
+        <p><a href="#">Вернуться наверх</a></p>
+    </div>
 
-    <script src="./Base2.js"></script>
-    <script src="./param2.js"></script>
-    <script>
-      const { createApp, ref, onMounted, watch } = Vue;
-
-      createApp({
-        setup() {
-          const developer = ref("Блінштейн");
-          const inspector = ref("Кронштейн");
-          const cipher = ref("23-07-0387КА");
-          const address = ref("Большая арнаутская 87");
-          const name = ref("H1");
-          const material = ref("AISI201");
-          const Width = ref(60);
-          const left = ref(10);
-          const right = ref(20);
-          const height = ref(70);
-          const up = ref(12);
-          const down = ref(16);
-          const diametr = ref(5);
-          const thickness = ref(2);
-          const count = ref(2);
-
-          const squareWidth = ref(50);
-          //   const squareHeight = ref(100);
-          const showDropdown = ref(false);
-          let draw = null;
-
-          function initializeDraw() {
-            tableKMD = new Array();
-            if (draw) {
-              draw.clear(); // Remove all elements and clear the container
-              draw.remove(); // Remove the draw instance
-            }
-            // Create a new draw instance
-            draw = SVG().addTo("#svgContainer").size("292mm", "292mm");
-            let b = new Base(draw);
-            plate(
-              draw,
-              b,
-              developer.value,
-              inspector.value,
-              cipher.value,
-              address.value,
-              name.value,
-              material.value,
-              Width.value,
-              left.value,
-              right.value,
-              height.value,
-              up.value,
-              down.value,
-              diametr.value,
-              thickness.value,
-              count.value
-            );
-          }
-
-          onMounted(() => {
-            initializeDraw();
-          });
-
-          watch(
-            [
-              developer,
-              inspector,
-              cipher,
-              address,
-              name,
-              material,
-              Width,
-              left,
-              right,
-              height,
-              up,
-              down,
-              diametr,
-              thickness,
-              count,
-            ],
-            () => {
-              initializeDraw();
-            }
-          );
-
-          return {
-            developer,
-            inspector,
-            cipher,
-            address,
-            name,
-            material,
-            Width,
-            left,
-            right,
-            height,
-            up,
-            down,
-            diametr,
-            thickness,
-            count,
-            showDropdown,
-          };
-        },
-      }).mount("#app");
-    </script>
-  </body>
+</body>
 </html>

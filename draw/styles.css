@@ -1,0 +1,124 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  width: 21cm;
+  display: block;
+
+}
+
+.page {
+  width: 18.5cm;
+  height: 28.7cm;
+  box-sizing: border-box; 
+  position: relative; /* Для позиционирования футера */
+  background-color: #fff;
+  margin: 5mm 5mm 10mm 20mm;
+  border: 0.3mm solid #050505;
+  padding: 3mm;
+  page-break-after:auto
+  /* page-break-after: auto; */
+}
+.page:first-child {
+  margin-top: 5mm;
+}
+
+.page:last-child {
+  margin-bottom: 5mm;
+  /* page-break-after: avoid;  */
+}
+
+
+.content {
+  padding-bottom: 30px; /* Отступ для футера */
+}
+
+.footer {
+  position: absolute;
+  bottom: 0cm; /* Отступ от нижнего края страницы */
+  left: 0cm; /* Отступ слева */
+  text-align: center;
+  font-size: 0.9em;
+  color: #000000;
+  /* display: flex; */
+  justify-content: space-between;
+  align-items: center;
+}
+
+.document-title {
+  flex-grow: 1; /* Чтобы занять доступное пространство */
+  text-align: left;
+}
+
+.page-number {
+  flex-grow: 1;
+  text-align: right;
+}
+.footer-table {
+  /* width: 18.5mm; */
+  border-collapse: collapse; /* Убираем двойные границы между ячейками */
+  font-size: 0.75em;
+  table-layout: fixed; /* Важно для точного контроля ширины столбцов */
+}
+
+.footer-table th,
+.footer-table td {
+  border: 0.3mm solid #020202; /* Границы ячеек */
+  padding: 2px 5px; /* Небольшие отступы внутри ячеек */
+  text-align: center;
+  height: 5mm; /* Устанавливаем высоту строки в 5мм */
+  overflow: hidden; /* Скрываем содержимое, если оно не помещается */
+  white-space: nowrap; /* Предотвращаем перенос текста на новую строку */
+  box-sizing: border-box; /* Учитываем padding и border в height */
+}
+
+.footer-table th {
+  background-color: #f5f5f5;
+  text-align: center;
+  font-weight: normal;
+}
+.image-gallery {
+    text-align: center; /* Центрируем изображения внутри этого блока */
+}
+
+.ranila{
+  text-align: right;
+  padding-right: 3mm;
+}
+
+@media print {
+
+    .document {
+        box-shadow: none; /* Убираем тень при печати */
+        margin: 0;
+        width: 21cm; /* Автоматическая ширина */
+    }
+
+    .page {
+        margin: 5mm  ;
+        margin-left: 20mm;
+        border: 0.3mm solid #050505; /* Рамка сохраняется */
+        padding: 20mm; /* Внутренние отступы сохраняются */
+        height: 28.7cm; /* Явная высота для печати */
+        box-sizing: border-box; /* Важно сохранить */
+        page-break-after: always; /* ПРИНУДИТЕЛЬНЫЙ РАЗРЫВ СТРАНИЦЫ */
+        padding-top: 0px;
+
+    }
+
+    .content{
+        margin-top: 0px; 
+        padding-top: 0px;
+    }
+    .page:last-child {
+        page-break-after: avoid; /* Не добавляем разрыв после последней страницы */
+    }
+    .image-gallery {
+    text-align: center; /* Центрируем изображения внутри этого блока */
+    margin-top: 0px; 
+}
+
+}

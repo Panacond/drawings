@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Примыкания</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <div class="content">
+        <div class="image-gallery">
+          <div id="icon-container"></div>
+          <!-- <img src="./автоматика.svg" alt="П1" /> -->
+        </div>
+                <div class="image-gallery">
+          <div id="icon-container2"></div>
+        </div>
+      </div>
+      <div class="footer">
+        <p class="ranila">ранилла -23</p>
+        <table class="footer-table">
+          <tbody>
+            <tr>
+              <td style="width: 7mm"></td>
+              <td style="width: 10mm"></td>
+              <td style="width: 10mm"></td>
+              <td style="width: 13mm"></td>
+              <td style="width: 15mm"></td>
+              <td style="width: 10mm"></td>
+              <td style="width: 120mm" rowspan="2" colspan="4" id="cipher">
+                25-07-0342-КА
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td style="width: 7mm"></td>
+              <td style="width: 10mm"></td>
+              <td style="width: 10mm"></td>
+              <td style="width: 13mm"></td>
+              <td style="width: 15mm"></td>
+              <td style="width: 10mm"></td>
+              <td rowspan="3" colspan="4" id="project-description">
+                Копейка автоматика
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>зм.</td>
+              <td>кільк.</td>
+              <td>арк.</td>
+              <td>№ док.</td>
+              <td>підпис</td>
+              <td>дата</td>
+            </tr>
+            <tr>
+              <td colspan="2">Розробив</td>
+              <td colspan="2" id="constructor">Івашкевич</td>
+              <td></td>
+              <td></td>
+              <td style="width: 70mm" rowspan="3">Завдання в ЦВФ</td>
+              <td style="width: 15mm">стадія</td>
+              <td>аркуш</td>
+              <td>аркушів</td>
+            </tr>
+            <tr>
+              <td colspan="2">Перевірив</td>
+              <td colspan="2"></td>
+              <td></td>
+              <td></td>
+              <td rowspan="2">Р</td>
+              <td rowspan="2"><span class="page-number"></span></td>
+              <td rowspan="2"></td>
+            </tr>
+            <tr>
+              <td colspan="2">Т. контроль</td>
+              <td colspan="2"></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td colspan="2"></td>
+              <td colspan="2"></td>
+              <td></td>
+              <td></td>
+              <td rowspan="3" id="description">Детали П1, П2</td>
+              <td colspan="3" rowspan="3">
+                Паритет <br />
+                Департамент алюміньевих конструкцій
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">Н. контоль</td>
+              <td colspan="2"></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td colspan="2">Затвердив</td>
+              <td colspan="2"></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+
+    <script>
+      
+    </script>
+
+    <script src="script.js"></script>
+    <script>
+      loadAndInsertSVG("icon-container", "./автоматика.svg");
+      loadAndInsertSVG("icon-container2", "./автоматика.svg", (svgElement) => {
+        const nameElement = svgElement.getElementById("name");
+        nameElement.textContent = "П2 - 1 шт.";
+        const lengthElement = svgElement.getElementById("length");
+        lengthElement.textContent = "1700";
+      });
+      const ran1 = Math.round((0.2*2.3*2+0.2*1.7*1)*100)/100
+      updateTextInHtmlByClass("ranila", `Ranilla - ${ran1} м²`)
+    </script>
+  </body>
+</html>
